@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LLA — Julie launch cuts · 90s / 60s / 45s</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05080F;--card:#0B1220;--line:#1C2740;--ink:#F4F2EC;--dim:#9BA6BC;--neon:#4DD8FF;--gold:#C6A460}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:20px;line-height:1.55}
+.w{max-width:1180px;margin:0 auto;padding:64px 24px 140px}
+h1{font-family:Inter;font-style:italic;font-weight:200;font-size:clamp(52px,8vw,104px);line-height:1.02;margin:0 0 18px;letter-spacing:-.02em}
+h1 span{color:var(--neon)}
+.lead{font-size:23px;color:#D3DAE8;max-width:820px;margin:0 0 12px}
+.meta{color:var(--dim);font-size:18px}
+.rule{height:1px;background:linear-gradient(90deg,var(--neon),transparent);margin:52px 0}
+.grid{display:grid;gap:34px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.thumbwrap{position:relative;display:block;line-height:0}
+.thumbwrap img{width:100%;height:auto;display:block}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:104px;height:104px;border-radius:50%;
+background:rgba(6,14,26,.62);border:2px solid rgba(255,255,255,.9);display:grid;place-items:center;backdrop-filter:blur(4px)}
+.play:after{content:"";width:0;height:0;border-left:32px solid #fff;border-top:20px solid transparent;border-bottom:20px solid transparent;margin-left:9px}
+.body{padding:30px 34px 34px}
+.title{font-style:italic;font-weight:300;font-size:40px;margin:0 0 6px}
+.sub{color:var(--dim);font-size:18px;margin-bottom:22px}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+a.btn{display:inline-block;padding:16px 30px;border-radius:999px;text-decoration:none;font-weight:600;font-size:18px}
+a.stream{background:var(--neon);color:#04121C}
+a.dl{background:transparent;color:var(--neon);border:1px solid rgba(77,216,255,.5)}
+a.thumb{background:transparent;color:var(--dim);border:1px solid var(--line)}
+video{width:100%;display:none;background:#000}
+.specs{margin-top:26px;color:var(--dim);font-size:17px;border-top:1px solid var(--line);padding-top:18px}
+.note{background:#0A101C;border-left:4px solid var(--gold);padding:24px 28px;border-radius:0 14px 14px 0;margin:34px 0;font-size:19px;color:#D8DEEA}
+</style></head><body><div class="w">
+<h1>Julie launch cuts<br><span>90s · 60s · 45s</span></h1>
+<p class="lead">Three hook-first cuts for lead generation. Every graphic card and every caption rebuilt in the V23 system — thin italic sans-serif, non-bold, oversized logo. The Drive master was never modified.</p>
+<p class="meta">1920×1080 · 30 fps · H.264 · −13 LUFS integrated · true peak ≤ −1 dBTP · captions burned in</p>
+<div class="rule"></div>
+<div class="grid" id="grid"></div>
+<div class="note"><strong>Card and caption system:</strong> all serif headlines from the source were replaced with thin italic sans-serif at large scale, the logo lockup was rebuilt at up to 54% of frame width, and captions are word-timed from Julie's own audio so no line is ever clipped mid-word.</div>
+</div>
+<script>
+const CUTS=[
+ {d:90,t:"90 seconds",s:"Hook: the year chart — 12 months for everyone else, about 8 months for Julie."},
+ {d:60,t:"60 seconds",s:"Hook: willpower is not the reason. Mechanism, proof, offer."},
+ {d:45,t:"45 seconds",s:"Hook: she beat a $2,000,000 protocol. Fastest path to the seat."}
+];
+const g=document.getElementById('grid');
+g.innerHTML=CUTS.map(c=>`
+<div class="item">
+  <a class="thumbwrap" href="#" onclick="playIt(event,${c.d})">
+    <img src="thumbs/thumb_${c.d}s.jpg" alt="Julie ${c.d} second cut thumbnail">
+    <span class="play"></span>
+  </a>
+  <video id="v${c.d}" controls preload="none" poster="thumbs/thumb_${c.d}s.jpg">
+    <source src="video/LLA_Julie_${c.d}s_v25.mp4" type="video/mp4">
+  </video>
+  <div class="body">
+    <div class="title">${c.t}</div>
+    <div class="sub">${c.s}</div>
+    <div class="btns">
+      <a class="btn stream" href="#" onclick="playIt(event,${c.d})">Stream now</a>
+      <a class="btn dl" href="video/LLA_Julie_${c.d}s_v25.mp4" download>Download MP4</a>
+      <a class="btn thumb" href="thumbs/thumb_${c.d}s.jpg" download>Download thumbnail</a>
+    </div>
+  </div>
+</div>`).join('');
+function playIt(e,d){e.preventDefault();const v=document.getElementById('v'+d);
+ v.style.display='block';v.parentElement.querySelector('.thumbwrap').style.display='none';v.play();}
+</script></body></html>
